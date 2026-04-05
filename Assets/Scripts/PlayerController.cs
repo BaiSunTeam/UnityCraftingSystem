@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
 
     Inventory inventory;
+    [SerializeField] private UI_Inventory uiInventory;
 
     public void Awake()
     {
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         inventory = new Inventory();
+        uiInventory.SetInventory(inventory);
     } 
 
     void Start()
@@ -34,7 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y);
+        rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, rb.linearVelocity.y);
     }
 
     public Inventory GetInventory() { 
@@ -45,10 +48,21 @@ public class PlayerController : MonoBehaviour
     {
         movementInput = playerInputs.Player.Move;
         movementInput.Enable();
+
+        toggleInventoryInput = playerInputs.Player.ToggleInventory;
+        toggleInventoryInput.Enable();
+        toggleInventoryInput.performed += OnToggleInventory;
     }
 
     private void OnDisable()
     {
-        movementInput.Enable();
+        movementInput.Disable();
+        toggleInventoryInput.Disable();
+        toggleInventoryInput.performed -= OnToggleInventory;
+    }
+
+    private void OnToggleInventory(InputAction.CallbackContext context)
+    {
+        uiInventory.ToggleView();
     }
 }

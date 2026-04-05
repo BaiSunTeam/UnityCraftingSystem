@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class UI_Inventory : MonoBehaviour
 {
-    private Inventory inventory;
-    private Transform itemSlotContainer;
-    private Transform itemSlotTemplate;
+    const int ROWS = 6;
+    const int COLUMNS = 5;
+    const int TOTAL_SLOTS = ROWS * COLUMNS;
+
+    const int OUTER_PADDING = 12;
+    const int SLOT_SPACING = 8;
+
+    
     private PlayerController player;
+    private Inventory inventory;
+
+    private bool IsOpen { get; set; }
 
     private void Awake() {
-        itemSlotContainer = transform.Find("itemSlotContainer");
-        itemSlotTemplate = itemSlotContainer.Find("itemSlotTemplate");
-        itemSlotTemplate.gameObject.SetActive(false);
+        gameObject.SetActive(true);
+
+        IsOpen = false;
+        gameObject.SetActive(IsOpen);
     }
 
     public void SetPlayer(PlayerController player) { 
@@ -19,5 +28,11 @@ public class UI_Inventory : MonoBehaviour
 
     public void SetInventory(Inventory inventory) { 
         this.inventory = inventory;
+    }
+
+    public void ToggleView()
+    {
+        IsOpen = !IsOpen;
+        gameObject.SetActive(IsOpen);
     }
 }
