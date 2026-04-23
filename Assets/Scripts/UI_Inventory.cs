@@ -1,25 +1,39 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Inventory : MonoBehaviour
 {
-    const int ROWS = 6;
-    const int COLUMNS = 5;
-    const int TOTAL_SLOTS = ROWS * COLUMNS;
-
-    const int OUTER_PADDING = 12;
-    const int SLOT_SPACING = 8;
-
-    
     private PlayerController player;
     private Inventory inventory;
-
-    private bool IsOpen { get; set; }
+    private Transform InventoryMenu;
+    private Transform ItemSlotTemplate;
 
     private void Awake() {
-        gameObject.SetActive(true);
+        InventoryMenu = transform.Find("InventoryMenu");
+        ItemSlotTemplate = InventoryMenu.Find("ItemSlotTemplate");
+    }   
 
-        IsOpen = false;
-        gameObject.SetActive(IsOpen);
+    public void RefreshInventory()
+    {
+        Debug.Log("Refreshed Inventory");
+        int x = 0;
+        int y = 0;
+        float itemSlotCellSize = 30f;
+        foreach (Item item in inventory.GetItemList())
+        {
+            RectTransform itemSlotRectTransform = Instantiate(ItemSlotTemplate, InventoryMenu).GetComponent<RectTransform>();
+            itemSlotRectTransform.gameObject.SetActive(true);
+            itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
+            Image image = itemSlotRectTransform.Find("ItemImage").GetComponent<Image>();
+            image.sprite = item.GetSprite();
+            
+            x++;
+            if (x > 4)
+            {
+                x = 0;
+                y++;
+            }
+        }
     }
 
     public void SetPlayer(PlayerController player) { 
@@ -28,11 +42,5 @@ public class UI_Inventory : MonoBehaviour
 
     public void SetInventory(Inventory inventory) { 
         this.inventory = inventory;
-    }
-
-    public void ToggleView()
-    {
-        IsOpen = !IsOpen;
-        gameObject.SetActive(IsOpen);
     }
 }

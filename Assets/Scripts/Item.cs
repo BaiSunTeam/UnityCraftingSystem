@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class Item
 {
     public ItemSO itemData;
@@ -7,5 +9,15 @@ public class Item
     {
         this.itemData = itemData;
         this.amount = amount;
+    }
+
+    public Sprite GetSprite()
+    {
+        return itemData.sprite;
+    }
+
+    public override string ToString()
+    {
+      return amount + " " + itemData.itemName;
     }
 }

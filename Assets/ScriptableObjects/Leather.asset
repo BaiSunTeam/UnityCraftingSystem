@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f42a648f371e634f8bb9584d53fe1b2, type: 3}
-  m_Name: HealthPotion
+  m_Name: Leather
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
-  itemName: HealthPotion
-  sprite: {fileID: -3237844493445452581, guid: 74c6c8aeed8e4eb4b8c929609f5c6ffe, type: 3}
+  itemName: Leather
+  sprite: {fileID: -7913775737931201815, guid: 74c6c8aeed8e4eb4b8c929609f5c6ffe, type: 3}
