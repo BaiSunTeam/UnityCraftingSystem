@@ -30,8 +30,7 @@ public class CraftingSystem_Testing : MonoBehaviour {
 
     private void OnToggleTest(InputAction.CallbackContext context)
     {
-        Vector2 randomDir = Random.insideUnitCircle.normalized;
-        Vector3 spawnPosition = (Vector3)(randomDir * Random.Range(0f, 3f));
+        Vector3 spawnPosition = new Vector3(Random.Range(-1f, 7f), -3f);
     
         Item testItem = new Item(testItemSO, 1);
         ItemWorldSpawner.Instance.SpawnItemWorld(spawnPosition, testItem);

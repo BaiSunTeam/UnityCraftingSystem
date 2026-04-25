@@ -16,4 +16,15 @@ public class ItemWorld : MonoBehaviour
         this.item = item;
         spriteRenderer.sprite = item.GetSprite();
     }
+
+    public Item GetItem()
+    {
+        return item;
+    }
+
+    public void DestroySelf()
+    {
+        // can be improved
+        Destroy(gameObject);
+    }
 }

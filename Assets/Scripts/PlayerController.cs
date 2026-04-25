@@ -40,6 +40,15 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, rb.linearVelocity.y);
     }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
+        if (itemWorld != null) {
+            inventory.AddItem(itemWorld.GetItem());
+            itemWorld.DestroySelf();
+        }
+    }
+
     public Inventory GetInventory() { 
         return inventory; 
     }
@@ -65,6 +74,8 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Current Inv: " + string.Join( ", ", inventory.GetItemList()));
         uiPlayerMenu.ToggleView();
-        // uiInventory.RefreshInventory();
+        uiInventory.RefreshInventory();
     }
+
+
 }
