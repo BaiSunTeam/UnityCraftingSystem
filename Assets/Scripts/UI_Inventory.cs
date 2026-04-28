@@ -14,6 +14,7 @@ public class UI_Inventory : MonoBehaviour
         ItemSlotTemplate = InventoryMenu.Find("ItemSlotTemplate");
     }   
 
+    // TODO: Can be optimized
     public void RefreshInventory()
     {
         Debug.Log("Refreshed Inventory");
