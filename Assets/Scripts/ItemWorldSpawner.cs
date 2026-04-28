@@ -13,8 +13,8 @@ public class ItemWorldSpawner : MonoBehaviour
 
     public ItemWorld SpawnItemWorld(Vector3 position, Item item)
     {
-        Transform prefab = item.itemData.pfItemWorld != null
-            ? item.itemData.pfItemWorld
+        Transform prefab = item.GetPrefab() != null
+            ? item.GetPrefab()
             : defaultPfItemWorld;
 
         Transform transform = Instantiate(prefab, position, Quaternion.identity);

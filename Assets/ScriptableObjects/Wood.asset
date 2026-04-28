@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemSO
   itemName: Wood
   sprite: {fileID: 7084260402273260374, guid: 74c6c8aeed8e4eb4b8c929609f5c6ffe, type: 3}
+  IsStackable: 1
+  pfItemWorld: {fileID: 0}

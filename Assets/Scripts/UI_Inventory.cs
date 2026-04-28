@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +34,8 @@ public class UI_Inventory : MonoBehaviour
             itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
             Image image = itemSlotRectTransform.Find("ItemImage").GetComponent<Image>();
             image.sprite = item.GetSprite();
+            TextMeshProUGUI countText = itemSlotRectTransform.Find("Count").GetComponent<TextMeshProUGUI>();
+            countText.SetText(item.GetAmount().ToString());
             
             x++;
             if (x > 4)
