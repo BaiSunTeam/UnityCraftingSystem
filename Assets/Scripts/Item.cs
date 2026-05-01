@@ -2,49 +2,40 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Item
-{
+public class Item {
     private ItemSO itemData;
     private int amount;
-    
-    public Item(ItemSO itemData, int amount)
-    {
+
+    public Item(ItemSO itemData, int amount) {
         this.itemData = itemData;
         this.amount = amount;
     }
 
-    public Sprite GetSprite()
-    {
+    public Sprite GetSprite() {
         return itemData.sprite;
     }
 
-    public string GetItemName()
-    {
+    public string GetItemName() {
         return itemData.itemName;
     }
 
-    public int GetAmount()
-    {
+    public int GetAmount() {
         return amount;
     }
 
-    public Transform GetPrefab()
-    {
+    public Transform GetPrefab() {
         return itemData.pfItemWorld;
     }
 
-    public bool IsStackable()
-    {
+    public bool IsStackable() {
         return itemData.IsStackable;
     }
 
-    public void IncreaseAmount(int amt)
-    {
+    public void IncreaseAmount(int amt) {
         amount += amt;
     }
 
-    public override string ToString()
-    {
-      return amount + " " + itemData.itemName;
+    public override string ToString() {
+        return amount + " " + itemData.itemName;
     }
 }

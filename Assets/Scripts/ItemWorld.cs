@@ -1,29 +1,24 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class ItemWorld : MonoBehaviour
-{
+public class ItemWorld : MonoBehaviour {
     private Item item;
     private SpriteRenderer spriteRenderer;
 
-    private void Awake()
-    {
+    private void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
-    
-    public void SetItem(Item item)
-    {
+
+    public void SetItem(Item item) {
         this.item = item;
         spriteRenderer.sprite = item.GetSprite();
     }
 
-    public Item GetItem()
-    {
+    public Item GetItem() {
         return item;
     }
 
-    public void DestroySelf()
-    {
+    public void DestroySelf() {
         // can be improved
         Destroy(gameObject);
     }

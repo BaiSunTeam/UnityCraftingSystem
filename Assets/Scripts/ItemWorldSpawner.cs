@@ -1,18 +1,15 @@
 using UnityEngine;
 
-public class ItemWorldSpawner : MonoBehaviour
-{
+public class ItemWorldSpawner : MonoBehaviour {
     public static ItemWorldSpawner Instance { get; private set; }
 
     [SerializeField] private Transform defaultPfItemWorld;
 
-    private void Awake()
-    {
+    private void Awake() {
         Instance = this;
     }
 
-    public ItemWorld SpawnItemWorld(Vector3 position, Item item)
-    {
+    public ItemWorld SpawnItemWorld(Vector3 position, Item item) {
         Transform prefab = item.GetPrefab() != null
             ? item.GetPrefab()
             : defaultPfItemWorld;

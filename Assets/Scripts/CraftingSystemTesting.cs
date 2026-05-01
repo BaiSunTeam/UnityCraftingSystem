@@ -10,28 +10,24 @@ public class CraftingSystem_Testing : MonoBehaviour {
     private PlayerInputs playerInputs;
     private InputAction toggleTest;
 
-    public void Awake()
-    {
+    public void Awake() {
         playerInputs = new PlayerInputs();
     }
 
-    private void OnEnable()
-    {
+    private void OnEnable() {
         toggleTest = playerInputs.Player.ToggleTest;
         toggleTest.Enable();
         toggleTest.performed += OnToggleTest;
     }
 
-    private void OnDisable()
-    {
+    private void OnDisable() {
         toggleTest.Disable();
         toggleTest.performed -= OnToggleTest;
     }
 
-    private void OnToggleTest(InputAction.CallbackContext context)
-    {
+    private void OnToggleTest(InputAction.CallbackContext context) {
         Vector3 spawnPosition = new Vector3(Random.Range(-1f, 7f), -3f);
-    
+
         Item testItem = new Item(testItemSO, 1);
         ItemWorldSpawner.Instance.SpawnItemWorld(spawnPosition, testItem);
     }
