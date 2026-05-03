@@ -37,8 +37,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collider) {
         ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
-        if (itemWorld != null) {
-            inventory.AddItem(itemWorld.GetItem());
+        if (itemWorld != null && inventory.AddItem(itemWorld.GetItem())) {
             itemWorld.DestroySelf();
         }
     }

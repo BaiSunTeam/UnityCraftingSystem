@@ -1810,7 +1810,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CraftingSystem_Testing
   player: {fileID: 425452179}
   uiInventory: {fileID: 44121905}
-  testItemSO: {fileID: 11400000, guid: ab5a6e8f84480274eb0668f9b67361b8, type: 2}
+  testItemSO1: {fileID: 11400000, guid: ab5a6e8f84480274eb0668f9b67361b8, type: 2}
+  testItemSO2: {fileID: 11400000, guid: 5fe8c326a271a8749a638449ddc7abfd, type: 2}
+  testItemSO3: {fileID: 11400000, guid: 1fd234d6cf6523844a18a37d1ec40546, type: 2}
 --- !u!4 &1360459086
 Transform:
   m_ObjectHideFlags: 0
@@ -2689,9 +2691,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '10
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}

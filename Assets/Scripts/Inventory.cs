@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using NUnit.Framework.Internal;
-using UnityEngine.AdaptivePerformance;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class Inventory {
     public event EventHandler OnItemListChanged;
@@ -15,17 +14,16 @@ public class Inventory {
     public Inventory() {
         ItemList = new List<Item>();
 
-        InventorySlotCount = 10;
+        InventorySlotCount = 9;
         InventorySlotArray = new InventorySlot[InventorySlotCount];
         for (int i = 0; i < InventorySlotCount; i++) {
             InventorySlotArray[i] = new InventorySlot(i);
         }
     }
 
-
     // TODO: Can be optimized
-    public void AddItem(Item item) {
-        Debug.Print(item.ToString());
+    public bool AddItem(Item item) {
+        Debug.Log(item.ToString());
         if (item.IsStackable()) {
             bool itemAlreadyInInventory = false;
             foreach (Item inventoryItem in ItemList) {
@@ -34,16 +32,42 @@ public class Inventory {
                     itemAlreadyInInventory = true;
                 }
             }
-            if (!itemAlreadyInInventory) ItemList.Add(item);
+            if (!itemAlreadyInInventory) {
+                ItemList.Add(item);
+                InventorySlot emptySlot = GetNextEmptyInventorySlot();
+                emptySlot?.SetItem(item);
+                if (emptySlot == null) return false;
+            }
         }
         else {
             ItemList.Add(item);
+            InventorySlot emptySlot = GetNextEmptyInventorySlot();
+            emptySlot?.SetItem(item);
+            if (emptySlot == null) return false;
         }
+
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
+        return true;
     }
 
     public List<Item> GetItemList() {
         return ItemList;
+    }
+
+
+    /*========== Inventory Slots ==========*/
+    public InventorySlot GetNextEmptyInventorySlot() {
+        foreach (InventorySlot inventorySlot in InventorySlotArray) {
+            if (inventorySlot.IsEmpty()) {
+                return inventorySlot;
+            }
+        }
+
+        return null;
+    }
+
+    public InventorySlot[] GetInventorySlotArray() {
+        return InventorySlotArray;
     }
 
     public class InventorySlot {
