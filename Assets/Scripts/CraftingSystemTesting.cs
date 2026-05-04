@@ -1,29 +1,35 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CraftingSystem_Testing : MonoBehaviour {
-
     [SerializeField] private PlayerController player;
     [SerializeField] private UI_Inventory uiInventory;
 
-    [SerializeField] private StartingItem[] startingItemArray;
+    [SerializeField] private ItemSO testItemSO;
 
-    [System.Serializable]
-    public struct StartingItem {
-        public ItemSO itemSO;
-        public int amount;
-        public Vector2Int position;
+    private PlayerInputs playerInputs;
+    private InputAction toggleTest;
+
+    public void Awake() {
+        playerInputs = new PlayerInputs();
     }
 
-    private void Start() {
-        uiInventory.SetPlayer(player);
-        uiInventory.SetInventory(player.GetInventory());
+    private void OnEnable() {
+        toggleTest = playerInputs.Player.ToggleTest;
+        toggleTest.Enable();
+        toggleTest.performed += OnToggleTest;
+    }
 
-        Inventory playerInventory = player.GetInventory();
-        foreach (StartingItem startingItem in startingItemArray) {
-            playerInventory.AddItem(
-                new Item(startingItem.itemSO, startingItem.amount)
-            );
-        }
+    private void OnDisable() {
+        toggleTest.Disable();
+        toggleTest.performed -= OnToggleTest;
+    }
+
+    private void OnToggleTest(InputAction.CallbackContext context) {
+        Vector3 spawnPosition = new Vector3(Random.Range(-1f, 7f), -3f);
+
+        Item testItem = new Item(testItemSO, 1);
+        ItemWorldSpawner.Instance.SpawnItemWorld(spawnPosition, testItem);
     }
 
 }

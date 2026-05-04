@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 7f42a648f371e634f8bb9584d53fe1b2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - sprite: {instanceID: 0}
+  - pfItemWorld: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
