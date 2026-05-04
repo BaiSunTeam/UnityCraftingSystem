@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     Inventory inventory;
     [SerializeField] private UI_PlayerMenu uiPlayerMenu;
     [SerializeField] private UI_Inventory uiInventory;
+    [SerializeField] private UI_CraftingMenu uiCraftingMenu;
 
     public void Awake() {
         playerInputs = new PlayerInputs();
@@ -37,8 +38,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collider) {
         ItemWorld itemWorld = collider.GetComponent<ItemWorld>();
-        if (itemWorld != null) {
-            inventory.AddItem(itemWorld.GetItem());
+        if (itemWorld != null && inventory.AddItem(itemWorld.GetItem())) {
             itemWorld.DestroySelf();
         }
     }
@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("Current Inv: " + string.Join(", ", inventory.GetItemList()));
         uiPlayerMenu.ToggleView();
         uiInventory.RefreshInventory();
+        uiCraftingMenu.RefreshCraftingMenu();
     }
 
 

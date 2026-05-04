@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Inventory : MonoBehaviour {
+    private readonly float _itemSlotCellSize = 30f;
+
     private PlayerController player;
     private Inventory inventory;
     private Transform InventoryMenu;
@@ -21,19 +23,22 @@ public class UI_Inventory : MonoBehaviour {
             Destroy(child.gameObject);
         }
 
-
         int x = 0;
         int y = 0;
-        float itemSlotCellSize = 30f;
-        foreach (Item item in inventory.GetItemList()) {
+        foreach (ItemSlot inventorySlot in inventory.GetItemSlotArray()) {
+            Item item = inventorySlot.GetItem();
+            
             RectTransform itemSlotRectTransform = Instantiate(ItemSlotTemplate, InventoryMenu).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
-            itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
-            Image image = itemSlotRectTransform.Find("ItemImage").GetComponent<Image>();
-            image.sprite = item.GetSprite();
-            TextMeshProUGUI countText = itemSlotRectTransform.Find("Count").GetComponent<TextMeshProUGUI>();
-            countText.SetText(item.GetAmount().ToString());
+            itemSlotRectTransform.anchoredPosition = new Vector2(x * _itemSlotCellSize, y * _itemSlotCellSize);
 
+            if (!inventorySlot.IsEmpty()) {
+                Image image = itemSlotRectTransform.Find("ItemImage").GetComponent<Image>();
+                image.sprite = item.GetSprite();
+                TextMeshProUGUI countText = itemSlotRectTransform.Find("Count").GetComponent<TextMeshProUGUI>();
+                countText.SetText(item.GetAmount().ToString());
+            }
+            
             x++;
             if (x > 4) {
                 x = 0;
