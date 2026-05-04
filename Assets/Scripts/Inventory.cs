@@ -9,15 +9,15 @@ public class Inventory {
     private List<Item> ItemList;
 
     private int InventorySlotCount;
-    private InventorySlot[] InventorySlotArray;
+    private ItemSlot[] InventorySlotArray;
 
     public Inventory() {
         ItemList = new List<Item>();
 
         InventorySlotCount = 9;
-        InventorySlotArray = new InventorySlot[InventorySlotCount];
+        InventorySlotArray = new ItemSlot[InventorySlotCount];
         for (int i = 0; i < InventorySlotCount; i++) {
-            InventorySlotArray[i] = new InventorySlot(i);
+            InventorySlotArray[i] = new ItemSlot(i);
         }
     }
 
@@ -34,16 +34,16 @@ public class Inventory {
             }
             if (!itemAlreadyInInventory) {
                 ItemList.Add(item);
-                InventorySlot emptySlot = GetNextEmptyInventorySlot();
-                emptySlot?.SetItem(item);
+                ItemSlot emptySlot = GetNextEmptyItemSlot();
                 if (emptySlot == null) return false;
+                emptySlot?.SetItem(item);
             }
         }
         else {
             ItemList.Add(item);
-            InventorySlot emptySlot = GetNextEmptyInventorySlot();
-            emptySlot?.SetItem(item);
+            ItemSlot emptySlot = GetNextEmptyItemSlot();
             if (emptySlot == null) return false;
+            emptySlot?.SetItem(item);
         }
 
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
@@ -56,8 +56,8 @@ public class Inventory {
 
 
     /*========== Inventory Slots ==========*/
-    public InventorySlot GetNextEmptyInventorySlot() {
-        foreach (InventorySlot inventorySlot in InventorySlotArray) {
+    public ItemSlot GetNextEmptyItemSlot() {
+        foreach (ItemSlot inventorySlot in InventorySlotArray) {
             if (inventorySlot.IsEmpty()) {
                 return inventorySlot;
             }
@@ -66,33 +66,7 @@ public class Inventory {
         return null;
     }
 
-    public InventorySlot[] GetInventorySlotArray() {
+    public ItemSlot[] GetItemSlotArray() {
         return InventorySlotArray;
-    }
-
-    public class InventorySlot {
-
-        private int index;
-        private Item item;
-
-        public InventorySlot(int index) {
-            this.index = index;
-        }
-
-        public Item GetItem() {
-            return item;
-        }
-
-        public void SetItem(Item item) {
-            this.item = item;
-        }
-
-        public void RemoveItem() {
-            item = null;
-        }
-
-        public bool IsEmpty() {
-            return item == null;
-        }
     }
 }

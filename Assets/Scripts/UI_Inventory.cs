@@ -1,4 +1,3 @@
-using NUnit.Framework.Internal;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +24,7 @@ public class UI_Inventory : MonoBehaviour {
         int x = 0;
         int y = 0;
         float itemSlotCellSize = 30f;
-        foreach (Inventory.InventorySlot inventorySlot in inventory.GetInventorySlotArray()) {
+        foreach (ItemSlot inventorySlot in inventory.GetItemSlotArray()) {
             Item item = inventorySlot.GetItem();
             
             RectTransform itemSlotRectTransform = Instantiate(ItemSlotTemplate, InventoryMenu).GetComponent<RectTransform>();
