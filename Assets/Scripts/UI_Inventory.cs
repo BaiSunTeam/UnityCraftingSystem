@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Inventory : MonoBehaviour {
+    private readonly float _itemSlotCellSize = 30f;
+
     private PlayerController player;
     private Inventory inventory;
     private Transform InventoryMenu;
@@ -23,13 +25,12 @@ public class UI_Inventory : MonoBehaviour {
 
         int x = 0;
         int y = 0;
-        float itemSlotCellSize = 30f;
         foreach (ItemSlot inventorySlot in inventory.GetItemSlotArray()) {
             Item item = inventorySlot.GetItem();
             
             RectTransform itemSlotRectTransform = Instantiate(ItemSlotTemplate, InventoryMenu).GetComponent<RectTransform>();
             itemSlotRectTransform.gameObject.SetActive(true);
-            itemSlotRectTransform.anchoredPosition = new Vector2(x * itemSlotCellSize, y * itemSlotCellSize);
+            itemSlotRectTransform.anchoredPosition = new Vector2(x * _itemSlotCellSize, y * _itemSlotCellSize);
 
             if (!inventorySlot.IsEmpty()) {
                 Image image = itemSlotRectTransform.Find("ItemImage").GetComponent<Image>();
