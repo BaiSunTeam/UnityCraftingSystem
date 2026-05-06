@@ -12,8 +12,10 @@ public class PlayerController : MonoBehaviour {
     public float moveSpeed = 5f;
 
     Inventory inventory;
+    Hotbar hotbar;
     [SerializeField] private UI_PlayerMenu uiPlayerMenu;
     [SerializeField] private UI_Inventory uiInventory;
+    [SerializeField] private UI_Hotbar uiHotbar;
     [SerializeField] private UI_CraftingMenu uiCraftingMenu;
 
     public void Awake() {
@@ -22,6 +24,9 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         inventory = new Inventory();
         uiInventory.SetInventory(inventory);
+
+        hotbar = new Hotbar();
+        uiHotbar.SetHotbar(hotbar);
     }
 
     void Start() {
@@ -66,6 +71,7 @@ public class PlayerController : MonoBehaviour {
         Debug.Log("Current Inv: " + string.Join(", ", inventory.GetItemList()));
         uiPlayerMenu.ToggleView();
         uiInventory.RefreshInventory();
+        uiHotbar.RefreshHotbar();
         uiCraftingMenu.RefreshCraftingMenu();
     }
 
